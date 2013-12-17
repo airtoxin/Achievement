@@ -1,0 +1,20 @@
+[
+	{
+		"caption": "View",
+		"mnemonic": "V",
+		"id": "view",
+		"children":
+		[
+			{
+				"caption": "Achievement",
+				"id": "achievement",
+				"children":
+				[
+					{"caption": "show achievement","command": "show_achievement"},
+					{"caption": "-"},
+					{"caption": "get hint", "command": "show_achievement"}
+				]
+			}
+		]
+	}
+]
