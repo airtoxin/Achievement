@@ -74,7 +74,7 @@ class ViewAchievementCommand(sublime_plugin.TextCommand):
         unlocked_settings = sublime.load_settings("unlocked.sublime-settings")
         unlocked_titles = unlocked_settings.get("unlocked_titles", [])
         for unlocked_title in sorted(unlocked_titles):
-            for unlock in reversed(sorted(unlocked_settings.get(unlocked_title, []))):
+            for unlock in reversed(unlocked_settings.get(unlocked_title, [])):
                 line = "*\t{unlock}\n".format(unlock=unlock)
                 achievement_window.insert(edit, 0, line)
 
