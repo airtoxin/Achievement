@@ -20,7 +20,7 @@ class EventAchievementChecker(sublime_plugin.EventListener):
         setting = sublime.load_settings("achievement.sublime-settings")
         count = setting.get("load_count") + 1
         self.count_achievement_function("load_count", count, (1,), "Hello load world!")
-        self.count_achievement_function("load_count", count, (10, 100, 300, 500, 1000, 10000, 100000), "Soad {num} times!")
+        self.count_achievement_function("load_count", count, (10, 100, 300, 500, 1000, 10000, 100000), "Load {num} times!")
         self.count_achievement_function("load_count", count, (99999999,), "Overload!!!")
         setting.set("load_count", count)
         sublime.save_settings("achievement.sublime-settings")
