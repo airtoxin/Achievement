@@ -6,7 +6,7 @@ def achievement_dialog(message):
     message = "YOU GOT A NEW ACHIEVEMENT\n\n" + message
     sublime.message_dialog(message)
 
-class AutoRunner(sublime_plugin.EventListener):
+class EventAchievementChecker(sublime_plugin.EventListener):
     def on_post_save_async(self, view):
         setting = sublime.load_settings("achievement.sublime-settings")
         count = setting.get("save_count") + 1
