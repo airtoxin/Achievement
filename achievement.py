@@ -32,10 +32,6 @@ class AutoRunner(sublime_plugin.EventListener):
         message(str): 'save {num} times!'
             message can contain integer number{num}
         """
-        self._check_count_achievement(count, setting_name, achieving_counts, message)
-
-    def _check_count_achievement(self, count, setting_name, achieving_counts, message):
-        print(count)
         if count in achieving_counts:
             message = message.format(num=count)
             achievement_dialog(message)
