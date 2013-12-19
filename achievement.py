@@ -25,6 +25,15 @@ class EventAchievementChecker(sublime_plugin.EventListener):
         setting.set("load_count", count)
         sublime.save_settings("achievement.sublime-settings")
 
+    def on_new_async(self, view):
+        setting = sublime.load_settings("achievement.sublime-settings")
+        count = setting.get("new_file_count") + 1
+        self.count_achievement_function("new_file_count", count, (1,), "Hello World!")
+        self.count_achievement_function("new_file_count", count, (10, 100, 300, 500, 1000, 10000, 100000), "Create new file {num} times!")
+        self.count_achievement_function("new_file_count", count, (99999999,), "THE MAKER")
+        setting.set("new_file_count", count)
+        sublime.save_settings("achievement.sublime-settings")
+
     def count_achievement_function(self, setting_name, count, achieving_counts, message):
         u"""
         setting_name(str): 'load_count'
