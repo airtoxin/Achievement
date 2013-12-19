@@ -8,11 +8,9 @@ def achievement_dialog(message):
 
 class AutoRunner(sublime_plugin.EventListener):
     def on_post_save_async(self, view):
-        # self._count_save()
         self.count_achievement_function("save_count", (1, 10, 100, 300, 500, 1000, 10000, 100000, 99999999), "save {num} times!")
 
     def on_load_async(self, view):
-        # self._count_load()
         self.count_achievement_function("load_count", (1, 10, 100, 300, 500, 1000, 10000, 100000, 99999999), "load {num} times!")
 
     def count_achievement_function(self, setting_name, achieving_counts, message):
