@@ -31,6 +31,7 @@ def count_achievement_function(setting_name, count, achieving_counts, message):
             unlocked_settings.set(setting_name, [message])
         sublime.save_settings("unlocked.sublime-settings")
 
+
 class OverrideCutCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         self.view.run_command("cut")
@@ -49,6 +50,7 @@ class OverrideCutCommandThread(object):
         setting.set("cut_count", count)
         sublime.save_settings("achievement.sublime-settings")
 
+
 class OverrideCopyCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         self.view.run_command("copy")
@@ -66,6 +68,7 @@ class OverrideCopyCommandThread(object):
         count_achievement_function("copy_count", count, (99999999,), "Multiverse")
         setting.set("copy_count", count)
         sublime.save_settings("achievement.sublime-settings")
+
 
 class OverridePasteCommand(sublime_plugin.TextCommand):
     def run(self, edit):
