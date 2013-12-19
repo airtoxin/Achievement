@@ -34,6 +34,15 @@ class EventAchievementChecker(sublime_plugin.EventListener):
         setting.set("new_file_count", count)
         sublime.save_settings("achievement.sublime-settings")
 
+    def on_clone_async(self, view):
+        setting = sublime.load_settings("achievement.sublime-settings")
+        count = setting.get("clone_file_count", 0) + 1
+        self.count_achievement_function("clone_file_count", count, (1,), "Duplicate Window!")
+        self.count_achievement_function("clone_file_count", count, (10, 100, 300, 500, 1000, 10000, 100000), "Create new file {num} times!")
+        self.count_achievement_function("clone_file_count", count, (99999999,), "Cloned Human")
+        setting.set("clone_file_count", count)
+        sublime.save_settings("achievement.sublime-settings")
+
     def count_achievement_function(self, setting_name, count, achieving_counts, message):
         u"""
         setting_name(str): 'load_count'
