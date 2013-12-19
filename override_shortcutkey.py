@@ -69,21 +69,3 @@ class OverrideCopyCommandThread(object):
         setting.set("copy_count", count)
         sublime.save_settings("achievement.sublime-settings")
 
-
-class OverridePasteCommand(sublime_plugin.TextCommand):
-    def run(self, edit):
-        self.view.run_command("paste")
-        o_cut = OverridePasteCommandThread()
-        thread = threading.Thread(target=o_cut)
-        thread.setDaemon(True)
-        thread.start()
-
-class OverridePasteCommandThread(object):
-    def __call__(self):
-        setting = sublime.load_settings("achievement.sublime-settings")
-        count = setting.get("paste_count", 0) + 1
-        count_achievement_function("paste_count", count, (1,), "Paste")
-        count_achievement_function("paste_count", count, (10, 100, 300, 500, 1000, 10000, 100000), "Paste {num} times!")
-        count_achievement_function("paste_count", count, (99999999,), "Painter")
-        setting.set("paste_count", count)
-        sublime.save_settings("achievement.sublime-settings")
