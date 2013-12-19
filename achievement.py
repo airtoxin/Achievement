@@ -10,7 +10,7 @@ class EventAchievementChecker(sublime_plugin.EventListener):
     def on_post_save_async(self, view):
         setting = sublime.load_settings("achievement.sublime-settings")
         count = setting.get("save_count", 0) + 1
-        self.count_achievement_function("save_count", count, (1,), "Hello save world!")
+        self.count_achievement_function("save_count", count, (1,), "Hello Save World!")
         self.count_achievement_function("save_count", count, (10, 100, 300, 500, 1000, 10000, 100000), "Save {num} times!")
         self.count_achievement_function("save_count", count, (99999999,), "Oversave!!!")
         setting.set("save_count", count)
@@ -19,7 +19,7 @@ class EventAchievementChecker(sublime_plugin.EventListener):
     def on_load_async(self, view):
         setting = sublime.load_settings("achievement.sublime-settings")
         count = setting.get("load_count", 0) + 1
-        self.count_achievement_function("load_count", count, (1,), "Hello load world!")
+        self.count_achievement_function("load_count", count, (1,), "Helload World!")
         self.count_achievement_function("load_count", count, (10, 100, 300, 500, 1000, 10000, 100000), "Load {num} times!")
         self.count_achievement_function("load_count", count, (99999999,), "Overload!!!")
         setting.set("load_count", count)
@@ -38,7 +38,7 @@ class EventAchievementChecker(sublime_plugin.EventListener):
         setting = sublime.load_settings("achievement.sublime-settings")
         count = setting.get("clone_file_count", 0) + 1
         self.count_achievement_function("clone_file_count", count, (1,), "Duplicate Window!")
-        self.count_achievement_function("clone_file_count", count, (10, 100, 300, 500, 1000, 10000, 100000), "Create new file {num} times!")
+        self.count_achievement_function("clone_file_count", count, (10, 100, 300, 500, 1000, 10000, 100000), "Duplicate file {num} times!")
         self.count_achievement_function("clone_file_count", count, (99999999,), "Cloned Human")
         setting.set("clone_file_count", count)
         sublime.save_settings("achievement.sublime-settings")
