@@ -3,6 +3,9 @@
 
 import sublime
 import sublime_plugin
+import sys
+sys.path.append("/".join(__file__.split("/")[:-1]))
+from override_shortcutkey import *
 
 def achievement_dialog(message):
     message = "YOU GOT A NEW ACHIEVEMENT\n\n" + message
