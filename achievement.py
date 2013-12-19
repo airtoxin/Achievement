@@ -3,7 +3,6 @@
 
 import sublime
 import sublime_plugin
-import json
 
 def achievement_dialog(message):
     message = "YOU GOT A NEW ACHIEVEMENT\n\n" + message
