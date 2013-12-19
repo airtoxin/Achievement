@@ -2,27 +2,46 @@ import sublime
 import sublime_plugin
 import json
 
-class AutoRunner(sublime_plugin.EventListener):
-    def on_post_save(self, view):
-        self._count_save()
+def achievement_dialog(message):
+    message = "YOU GOT A NEW ACHIEVEMENT\n\n" + message
+    sublime.message_dialog(message)
 
-    def _count_save(self):
+class AutoRunner(sublime_plugin.EventListener):
+    def on_post_save_async(self, view):
+        # self._count_save()
+        self.count_achievement_function("save_count", (1, 10, 100, 300, 500, 1000, 10000, 100000, 99999999), "save {num} times!")
+
+    def on_load_async(self, view):
+        # self._count_load()
+        self.count_achievement_function("load_count", (1, 10, 100, 300, 500, 1000, 10000, 100000, 99999999), "load {num} times!")
+
+    def count_achievement_function(self, setting_name, achieving_counts, message):
+        u"""
+        setting_name(str): 'load_count'
+        achieving_counts(int list): (1, 10, 100, 5000, 1000)
+        message(str): 'save {num} times!'
+            message can contain integer number{num}
+        """
         setting = sublime.load_settings("achievement.sublime-settings")
-        save_count = setting.get("save_count")
-        save_count += 1
-        self._check_save_achievement(save_count)
-        setting.set("save_count", save_count)
+        count = setting.get(setting_name) + 1
+        self._check_count_achievement(count, setting_name, achieving_counts, message)
+        setting.set(setting_name, count)
         sublime.save_settings("achievement.sublime-settings")
 
-    def _check_save_achievement(self, save_count):
-        print(save_count)
-        if save_count in range(1000): #(1, 10, 100, 300, 500, 1000):
-            message = "save " + str(save_count) + " times!"
-            sublime.message_dialog(message)
-            unlocked_achievement = sublime.load_settings("unlocked.sublime-settings")
-            unlocked = unlocked_achievement.get("unlocked")
-            unlocked.append(message)
-            unlocked_achievement.set("unlocked", unlocked)
+    def _check_count_achievement(self, count, setting_name, achieving_counts, message):
+        if count in achieving_counts:
+            message = message.format(num=count)
+            achievement_dialog(message)
+            unlocked_settings = sublime.load_settings("unlocked.sublime-settings")
+            unlocked_titles = unlocked_settings.get("unlocked_titles", [])
+            if setting_name in unlocked_titles:
+                c_setting = unlocked_settings.get(setting_name, [])
+                c_setting.append(message)
+                unlocked_settings.set(setting_name, c_setting)
+            else:
+                unlocked_titles.append(setting_name)
+                unlocked_settings.set("unlocked_titles", unlocked_titles)
+                unlocked_settings.set(setting_name, [message])
             sublime.save_settings("unlocked.sublime-settings")
 
 
@@ -31,9 +50,14 @@ class ViewAchievementCommand(sublime_plugin.TextCommand):
         w = self.view.window()
         achievement_window = w.new_file()
         # write unlocked achievement
-        unlocked = sublime.load_settings("unlocked.sublime-settings").get("unlocked")
-        for lock in reversed(unlocked):
-            line = "*\t" + lock + "\n"
+        unlocked_settings = sublime.load_settings("unlocked.sublime-settings")
+        unlocked_titles = unlocked_settings.get("unlocked_titles", [])
+        for unlocked_title in sorted(unlocked_titles):
+            for unlock in reversed(sorted(unlocked_settings.get(unlocked_title, []))):
+                line = "*\t{unlock}\n".format(unlock=unlock)
+                achievement_window.insert(edit, 0, line)
+
+            line = "\n+=+=+=+=+=+=+=+ {unlocked_title} +=+=+=+=+=+=+=+\n".format(unlocked_title=unlocked_title)
             achievement_window.insert(edit, 0, line)
 
         message = "*=*=*=*=*=*=*=* UNLOCKED ACHIEVEMENTS *=*=*=*=*=*=*=*\n"
