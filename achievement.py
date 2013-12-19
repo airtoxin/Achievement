@@ -9,7 +9,7 @@ def achievement_dialog(message):
 class EventAchievementChecker(sublime_plugin.EventListener):
     def on_post_save_async(self, view):
         setting = sublime.load_settings("achievement.sublime-settings")
-        count = setting.get("save_count") + 1
+        count = setting.get("save_count", 0) + 1
         self.count_achievement_function("save_count", count, (1,), "Hello save world!")
         self.count_achievement_function("save_count", count, (10, 100, 300, 500, 1000, 10000, 100000), "Save {num} times!")
         self.count_achievement_function("save_count", count, (99999999,), "Oversave!!!")
@@ -18,7 +18,7 @@ class EventAchievementChecker(sublime_plugin.EventListener):
 
     def on_load_async(self, view):
         setting = sublime.load_settings("achievement.sublime-settings")
-        count = setting.get("load_count") + 1
+        count = setting.get("load_count", 0) + 1
         self.count_achievement_function("load_count", count, (1,), "Hello load world!")
         self.count_achievement_function("load_count", count, (10, 100, 300, 500, 1000, 10000, 100000), "Load {num} times!")
         self.count_achievement_function("load_count", count, (99999999,), "Overload!!!")
@@ -27,7 +27,7 @@ class EventAchievementChecker(sublime_plugin.EventListener):
 
     def on_new_async(self, view):
         setting = sublime.load_settings("achievement.sublime-settings")
-        count = setting.get("new_file_count") + 1
+        count = setting.get("new_file_count", 0) + 1
         self.count_achievement_function("new_file_count", count, (1,), "Hello World!")
         self.count_achievement_function("new_file_count", count, (10, 100, 300, 500, 1000, 10000, 100000), "Create new file {num} times!")
         self.count_achievement_function("new_file_count", count, (99999999,), "THE MAKER")
