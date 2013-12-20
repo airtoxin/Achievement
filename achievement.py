@@ -6,23 +6,28 @@ import sublime_plugin
 import sys
 sys.path.append("/".join(__file__.split("/")[:-1]))
 from override_shortcutkey import *
+from achievement_functions import achievement_dialog, achievement_function, count_achievement_function
 
-def achievement_dialog(message):
-    message = "YOU GOT A NEW ACHIEVEMENT\n\n" + message
-    sublime.message_dialog(message)
 
 class EventAchievementChecker(sublime_plugin.EventListener):
     def on_post_save_async(self, view):
         setting = sublime.load_settings("achievement.sublime-settings")
 
         # save_count achievement
-        count = setting.get("save_count", 0) + 1
-        self.count_achievement_function("save_count", count, (1,), "Hello Save World!")
-        self.count_achievement_function("save_count", count, (10, 100, 300, 500, 1000, 10000, 100000), "Save {num} times!")
-        self.count_achievement_function("save_count", count, (99999999,), "Oversave!!!")
-        setting.set("save_count", count)
+        setting_name = "save_count"
+        count = setting.get(setting_name, 0) + 1
+        self.count_achievement_function(setting_name, count, (1,), "Hello Save World!")
+        self.count_achievement_function(setting_name, count, (10, 100, 300, 500, 1000, 10000, 100000), "Save {num} times!")
+        self.count_achievement_function(setting_name, count, (99999999,), "Oversave!!!")
+        setting.set(setting_name, count)
 
         # filename achievement
+        filename = view.file_name().split("/")[-1]
+        setting_name = "filename"
+        pass
+
+        # achievement_function(setting_name, message)
+
         sublime.save_settings("achievement.sublime-settings")
 
 
