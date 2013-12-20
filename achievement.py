@@ -22,14 +22,35 @@ class EventAchievementChecker(sublime_plugin.EventListener):
         setting.set(setting_name, count)
 
         # filename achievement
-        filename = view.file_name().split("/")[-1]
         setting_name = "filename"
-        pass
-
-        # achievement_function(setting_name, message)
+        filename = view.file_name().split("/")[-1].lower()
+        if "hoge" in filename:
+            message = "new file contains 'hoge' in filename"
+            achievement_function(setting_name, message)
+        if "fuga" in filename:
+            message = "new file contains 'fuga' in filename"
+            achievement_function(setting_name, message)
+        if "piyo" in filename:
+            message = "new file contains 'piyo' in filename"
+            achievement_function(setting_name, message)
+        if "foo" in filename:
+            message = "new file contains 'foo' in filename"
+            achievement_function(setting_name, message)
+        if "baa" in filename:
+            message = "new file contains 'bar' in filename"
+            achievement_function(setting_name, message)
+        if "baz" in filename:
+            message = "new file contains 'baz' in filename"
+            achievement_function(setting_name, message)
+        if "xyzzy" in filename:
+            message = "new file contains 'xyzzy' in filename"
+            achievement_function(setting_name, message)
+        if "the answer to the ultimate question of life, the universe, and everything" == filename:
+            setting_name = "easter_egg"
+            message = "42"
+            achievement_function(setting_name, message)
 
         sublime.save_settings("achievement.sublime-settings")
-
 
     def on_load_async(self, view):
         setting = sublime.load_settings("achievement.sublime-settings")
