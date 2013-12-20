@@ -141,9 +141,11 @@ class EventAchievementChecker(sublime_plugin.EventListener):
             sublime.save_settings("achievement.sublime-settings")
 
     def on_window_command(self, window, command_name, args):
+        pass
         # print("WINDOW")
         # print(window, command_name, args)
     def on_query_context(view, key, operator, operand, match_all):
+        pass
         # print("QUERY_CONTEXT")
         # print(key, operator, operand, match_all)
 
