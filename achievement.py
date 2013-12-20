@@ -13,6 +13,7 @@ def achievement_dialog(message):
 
 class EventAchievementChecker(sublime_plugin.EventListener):
     def on_post_save_async(self, view):
+        # save_count achievement
         setting = sublime.load_settings("achievement.sublime-settings")
         count = setting.get("save_count", 0) + 1
         self.count_achievement_function("save_count", count, (1,), "Hello Save World!")
@@ -22,6 +23,7 @@ class EventAchievementChecker(sublime_plugin.EventListener):
         sublime.save_settings("achievement.sublime-settings")
 
     def on_load_async(self, view):
+        # load_count achievement
         setting = sublime.load_settings("achievement.sublime-settings")
         count = setting.get("load_count", 0) + 1
         self.count_achievement_function("load_count", count, (1,), "Helload World!")
@@ -31,6 +33,7 @@ class EventAchievementChecker(sublime_plugin.EventListener):
         sublime.save_settings("achievement.sublime-settings")
 
     def on_new_async(self, view):
+        # new_file_count achievement
         setting = sublime.load_settings("achievement.sublime-settings")
         count = setting.get("new_file_count", 0) + 1
         self.count_achievement_function("new_file_count", count, (1,), "Hello World!")
@@ -40,6 +43,7 @@ class EventAchievementChecker(sublime_plugin.EventListener):
         sublime.save_settings("achievement.sublime-settings")
 
     def on_clone_async(self, view):
+        # clone_file_count achievement
         setting = sublime.load_settings("achievement.sublime-settings")
         count = setting.get("clone_file_count", 0) + 1
         self.count_achievement_function("clone_file_count", count, (1,), "Duplicate Window!")
