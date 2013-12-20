@@ -33,6 +33,7 @@ def count_achievement_function(setting_name, count, achieving_counts, message):
 
 
 class OverrideCutCommand(sublime_plugin.TextCommand):
+    u""" ⌘+x """
     def run(self, edit):
         self.view.run_command("cut")
         command_thread = OverrideCutCommandThread()
@@ -52,6 +53,7 @@ class OverrideCutCommandThread(object):
 
 
 class OverrideCopyCommand(sublime_plugin.TextCommand):
+    u""" ⌘+c """
     def run(self, edit):
         self.view.run_command("copy")
         command_thread = OverrideCopyCommandThread()
@@ -71,6 +73,7 @@ class OverrideCopyCommandThread(object):
 
 
 class OverridePasteCommand(sublime_plugin.TextCommand):
+    u""" ⌘+v """
     def run(self, edit):
         self.view.run_command("paste")
         command_thread = OverridePasteCommandThread()
