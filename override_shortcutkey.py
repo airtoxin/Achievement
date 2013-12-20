@@ -105,7 +105,6 @@ class OverridePasteCommand(sublime_plugin.TextCommand):
         setting_name = "pasting"
         message = ""
         paste_size = len(sublime.get_clipboard(1073741824)) # if character size over 1073741824(1GB), return 0
-        print(paste_size)
         if paste_size == 1:
             message = "ant"
         elif paste_size == 0:
@@ -119,3 +118,10 @@ class OverridePasteCommand(sublime_plugin.TextCommand):
         elif paste_size == 65536:
             message = "JUST A 2^(2^(2^2)) CHARACTERS PASTE ONE TIME"
         achievement_function(setting_name, message)
+
+
+class OverrideSelectAllCommand(sublime_plugin.TextCommand):
+    def run(self, edit):
+        selection = self.view.sel()
+        selection.add(sublime.Region(0, self.view.size()))
+        print("hogeeeeeeeeeeeeee")
