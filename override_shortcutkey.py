@@ -9,6 +9,24 @@ def achievement_dialog(message):
     message = "YOU GOT A NEW ACHIEVEMENT\n\n" + message
     sublime.message_dialog(message)
 
+def achievement_function(setting_name, message):
+    u"""
+    setting_name(str): 'hogehoge'
+    message(str): '!!CONGRATULATION!!'
+    """
+    achievement_dialog(message)
+    unlocked_settings = sublime.load_settings("unlocked.sublime-settings")
+    unlocked_titles = unlocked_settings.get("unlocked_titles", [])
+    if setting_name in unlocked_titles:
+        c_setting = unlocked_settings.get(setting_name, [])
+        c_setting.append(message)
+        unlocked_settings.set(setting_name, c_setting)
+    else:
+        unlocked_titles.append(setting_name)
+        unlocked_settings.set("unlocked_titles", unlocked_titles)
+        unlocked_settings.set(setting_name, [message])
+    sublime.save_settings("unlocked.sublime-settings")
+
 def count_achievement_function(setting_name, count, achieving_counts, message):
     u"""
     setting_name(str): 'load_count'
@@ -18,18 +36,7 @@ def count_achievement_function(setting_name, count, achieving_counts, message):
     """
     if count in achieving_counts:
         message = message.format(num=count)
-        achievement_dialog(message)
-        unlocked_settings = sublime.load_settings("unlocked.sublime-settings")
-        unlocked_titles = unlocked_settings.get("unlocked_titles", [])
-        if setting_name in unlocked_titles:
-            c_setting = unlocked_settings.get(setting_name, [])
-            c_setting.append(message)
-            unlocked_settings.set(setting_name, c_setting)
-        else:
-            unlocked_titles.append(setting_name)
-            unlocked_settings.set("unlocked_titles", unlocked_titles)
-            unlocked_settings.set(setting_name, [message])
-        sublime.save_settings("unlocked.sublime-settings")
+        achievement_function(setting_name, message)
 
 
 class OverrideCutCommand(sublime_plugin.TextCommand):
