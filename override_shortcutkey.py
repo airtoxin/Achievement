@@ -36,13 +36,11 @@ class OverrideCutCommand(sublime_plugin.TextCommand):
     u""" ⌘+x """
     def run(self, edit):
         self.view.run_command("cut")
-        command_thread = OverrideCutCommandThread()
-        thread = threading.Thread(target=command_thread)
+        thread = threading.Thread(target=self._command_thread)
         thread.setDaemon(True)
         thread.start()
 
-class OverrideCutCommandThread(object):
-    def __call__(self):
+    def _command_thread(self):
         setting = sublime.load_settings("achievement.sublime-settings")
         count = setting.get("cut_count", 0) + 1
         count_achievement_function("cut_count", count, (1,), "Scissors!")
@@ -56,13 +54,11 @@ class OverrideCopyCommand(sublime_plugin.TextCommand):
     u""" ⌘+c """
     def run(self, edit):
         self.view.run_command("copy")
-        command_thread = OverrideCopyCommandThread()
-        thread = threading.Thread(target=command_thread)
+        thread = threading.Thread(target=self._command_thread)
         thread.setDaemon(True)
         thread.start()
 
-class OverrideCopyCommandThread(object):
-    def __call__(self):
+    def _command_thread(self):
         setting = sublime.load_settings("achievement.sublime-settings")
         count = setting.get("copy_count", 0) + 1
         count_achievement_function("copy_count", count, (1,), "Copy Machine!")
@@ -76,13 +72,11 @@ class OverridePasteCommand(sublime_plugin.TextCommand):
     u""" ⌘+v """
     def run(self, edit):
         self.view.run_command("paste")
-        command_thread = OverridePasteCommandThread()
-        thread = threading.Thread(target=command_thread)
+        thread = threading.Thread(target=self._command_thread)
         thread.setDaemon(True)
         thread.start()
 
-class OverridePasteCommandThread(object):
-    def __call__(self):
+    def _command_thread(self):
         setting = sublime.load_settings("achievement.sublime-settings")
         count = setting.get("paste_count", 0) + 1
         count_achievement_function("paste_count", count, (1,), "Paste")
