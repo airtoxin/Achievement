@@ -113,11 +113,11 @@ class EventAchievementChecker(sublime_plugin.EventListener):
     def on_selection_modified_async(self, view):
         count_achievement_function("selector_count", len(view.sel()), (2,), "multi selector!")
         count_achievement_function("selector_count", len(view.sel()), (15, 30, 50, 100), "select {num} place one time")
-        count_achievement_function("selector_count", len(view.sel()), (200,), "SELECTOR")
+        count_achievement_function("selector_count", len(view.sel()), (200,), "THE SELECTOR")
 
     def on_text_command(self, view, command_name, args):
-        print("TEXT")
-        print(view, command_name, args)
+        # print("TEXT")
+        # print(view, command_name, args)
         thread = threading.Thread(target=self._on_text_command_achievement_thread, args=(view, command_name, args))
         thread.setDaemon(True)
         thread.start()
@@ -134,18 +134,18 @@ class EventAchievementChecker(sublime_plugin.EventListener):
             # view_achievement_count achievement
             setting = sublime.load_settings("achievement.sublime-settings")
             count = setting.get("view_achievement_count", 0) + 1
-            count_achievement_function("view_achievement_count", count, (1,), "Check!")
+            count_achievement_function("view_achievement_count", count, (1,), "Checking!")
             count_achievement_function("view_achievement_count", count, (10, 100, 300, 500, 1000, 10000, 100000), "View achievements {num} times!")
             count_achievement_function("view_achievement_count", count, (99999999,), "Loiterer")
             setting.set("view_achievement_count", count)
             sublime.save_settings("achievement.sublime-settings")
 
     def on_window_command(self, window, command_name, args):
-        print("WINDOW")
-        print(window, command_name, args)
+        # print("WINDOW")
+        # print(window, command_name, args)
     def on_query_context(view, key, operator, operand, match_all):
-        print("QUERY_CONTEXT")
-        print(key, operator, operand, match_all)
+        # print("QUERY_CONTEXT")
+        # print(key, operator, operand, match_all)
 
 
 class ViewAchievementCommand(sublime_plugin.TextCommand):

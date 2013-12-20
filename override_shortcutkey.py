@@ -98,4 +98,7 @@ class OverrideSelectAllCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         selection = self.view.sel()
         selection.add(sublime.Region(0, self.view.size()))
-        print("hogeeeeeeeeeeeeee")
+        # TODO Set achievements
+        # Select all count
+        # Selecting characters size
+        # print("hogeeeeeeeeeeeeee")
