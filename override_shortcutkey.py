@@ -98,7 +98,48 @@ class OverrideSelectAllCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         selection = self.view.sel()
         selection.add(sublime.Region(0, self.view.size()))
-        # TODO Set achievements
-        # Select all count
-        # Selecting characters size
-        # print("hogeeeeeeeeeeeeee")
+        thread = threading.Thread(target=self._override_select_all_command_thread)
+        thread.setDaemon(True)
+        thread.start()
+
+    def _override_select_all_command_thread(self):
+        setting = sublime.load_settings("achievement.sublime-settings")
+
+        # select_all_count achievement
+        setting_name = "select_all_count"
+        count = setting.get(setting_name, 0) + 1
+        count_achievement_function(setting_name, count, (1,), "Whole selection")
+        count_achievement_function(setting_name, count, (10, 100, 300, 500, 1000, 10000, 100000), "Select all {num} times!")
+        count_achievement_function(setting_name, count, (99999999,), "ALL")
+        setting.set(setting_name, count)
+
+        # selectiong_characters_size achievement
+        setting_name = "selectiong_characters_size"
+        message = ""
+        size = self.view.size()
+        if size == 1:
+            message = "Minimal file"
+            achievement_function(setting_name, message)
+        if size == 666:
+            message = "EVILMAN"
+            achievement_function(setting_name, message)
+        if size >= 104857600:
+            message = "Over 100MB selection"
+            achievement_function(setting_name, message)
+        if size >= 314572800:
+            message = "Over 300MB selection"
+            achievement_function(setting_name, message)
+        if size >= 524288000:
+            message = "Over 500MB selection"
+            achievement_function(setting_name, message)
+        if size >= 1073741824:
+            message = "Over 1GB selection"
+            achievement_function(setting_name, message)
+        if size >= 10737418240:
+            message = "OMG!! Over 10GB selection!!"
+            achievement_function(setting_name, message)
+        if size >= 1099511627776:
+            message = "!!!!!!UNBELIEVABLE!!!Over!1TB!selection!!!!!!!!!"
+            achievement_function(setting_name, message)
+
+        sublime.save_settings("achievement.sublime-settings")
