@@ -53,13 +53,15 @@ class OverrideCutCommand(sublime_plugin.TextCommand):
         thread.start()
 
     def _command_thread(self):
-        # cut_count achievement
         setting = sublime.load_settings("achievement.sublime-settings")
+
+        # cut_count achievement
         count = setting.get("cut_count", 0) + 1
         count_achievement_function("cut_count", count, (1,), "Scissors!")
         count_achievement_function("cut_count", count, (10, 100, 300, 500, 1000, 10000, 100000), "Cut {num} times!")
         count_achievement_function("cut_count", count, (99999999,), "Jack the Ripper")
         setting.set("cut_count", count)
+
         sublime.save_settings("achievement.sublime-settings")
 
 
@@ -72,13 +74,15 @@ class OverrideCopyCommand(sublime_plugin.TextCommand):
         thread.start()
 
     def _command_thread(self):
-        # copy_count achievement
         setting = sublime.load_settings("achievement.sublime-settings")
+
+        # copy_count achievement
         count = setting.get("copy_count", 0) + 1
         count_achievement_function("copy_count", count, (1,), "Copy Machine!")
         count_achievement_function("copy_count", count, (10, 100, 300, 500, 1000, 10000, 100000), "Copy {num} times!")
         count_achievement_function("copy_count", count, (99999999,), "Multiverse")
         setting.set("copy_count", count)
+
         sublime.save_settings("achievement.sublime-settings")
 
 
@@ -95,13 +99,14 @@ class OverridePasteCommand(sublime_plugin.TextCommand):
         count_paste_size_thread.start()
 
     def _override_paste_command_thread(self):
-        # paste_count achievement
         setting = sublime.load_settings("achievement.sublime-settings")
+        # paste_count achievement
         count = setting.get("paste_count", 0) + 1
         count_achievement_function("paste_count", count, (1,), "Paste")
         count_achievement_function("paste_count", count, (10, 100, 300, 500, 1000, 10000, 100000), "Paste {num} times!")
         count_achievement_function("paste_count", count, (99999999,), "Painter")
         setting.set("paste_count", count)
+
         sublime.save_settings("achievement.sublime-settings")
 
     def _count_paste_size_thread(self):
