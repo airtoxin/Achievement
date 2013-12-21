@@ -152,6 +152,7 @@ class EventAchievementChecker(sublime_plugin.EventListener):
 
 class ViewAchievementCommand(sublime_plugin.TextCommand):
     def run(self, edit):
+        size = 50
         w = self.view.window()
         achievement_window = w.new_file()
         # write unlocked achievement
@@ -159,11 +160,11 @@ class ViewAchievementCommand(sublime_plugin.TextCommand):
         unlocked_titles = unlocked_settings.get("unlocked_titles", [])
         for unlocked_title in sorted(unlocked_titles):
             for unlock in reversed(unlocked_settings.get(unlocked_title, [])):
-                line = "*\t{unlock}\n".format(unlock=unlock)
+                line = "{unlock}".format(unlock=unlock).center(size) + "\n"
                 achievement_window.insert(edit, 0, line)
 
-            line = "\n+=+=+=+=+=+=+=+ {unlocked_title} +=+=+=+=+=+=+=+\n".format(unlocked_title=unlocked_title)
+            line = "\n" + "+=+=+=+=+=+=+=+ {unlocked_title} +=+=+=+=+=+=+=+".format(unlocked_title=unlocked_title).center(size) + "\n"
             achievement_window.insert(edit, 0, line)
 
-        message = "*=*=*=*=*=*=*=* UNLOCKED ACHIEVEMENTS *=*=*=*=*=*=*=*\n"
+        message = "*=*=*=*=*=*=*=* UNLOCKED ACHIEVEMENTS *=*=*=*=*=*=*=*".center(size) + "\n"
         achievement_window.insert(edit, 0, message)
