@@ -1,3 +1,3 @@
 [
-	{ "caption": "Show Unlocked Achievements", "command": "view_achievement" }
+	{ "caption": "View Achievements", "command": "view_achievement" }
 ]
