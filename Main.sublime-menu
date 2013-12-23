@@ -1,14 +1,27 @@
 [
 	{
-		"caption": "View",
-		"mnemonic": "V",
-		"id": "view",
+		"caption": "Preferences",
+		"mnemonic": "n",
+		"id": "preferences",
 		"children":
 		[
 			{
-				"caption": "Achievement",
-				"id": "achievement",
-				"command": "view_achievement"
+				"caption": "Package Settings",
+				"mnemonic": "P",
+				"id": "package-settings",
+				"children":
+				[
+				{
+					"caption": "Achievement",
+					"children":
+					[
+						{
+							"caption": "View Achievements",
+							"command": "view_achievement"
+						}
+					]
+				}
+				]
 			}
 		]
 	}
