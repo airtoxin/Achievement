@@ -17,7 +17,7 @@ or
 
 ##How To Use
 
-###Show Unlocked Achievement
+###Show Unlocked Achievements
 In your sublime text menu, __Sublime Text > Preferences > Package Settings > Achievement > Show Achievements__, shows your unlocked achievements (shortcut key: __⌘+⇧+,__)
 
 Or, in command palette, select __View Achievements__
