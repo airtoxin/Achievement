@@ -50,6 +50,29 @@ class EventAchievementChecker(sublime_plugin.EventListener):
             message = "42"
             achievement_function(setting_name, message)
 
+        # file_type achievement
+        setting_name = "file_type"
+        current_syntax = view.settings().get("syntax")
+        syntaxes = setting.get(setting_name, [])
+        if current_syntax not in syntaxes:
+            syntaxes.append(current_syntax)
+            setting.set(setting_name, syntaxes)
+            if len(syntaxes) == 10:
+                message = "Multilingual (Use 10 kinds of language syntax)"
+                achievement_function(setting_name, message)
+            elif len(syntaxes) == 20:
+                message = "Multibilingual (Use 20 kinds of language syntax)"
+                achievement_function(setting_name, message)
+            elif len(syntaxes) == 30:
+                message = "Multitrilingual (Use 30 kinds of language syntax)"
+                achievement_function(setting_name, message)
+            elif len(syntaxes) == 40:
+                message = "Multiquadrilingual (Use 40 kinds of language syntax)"
+                achievement_function(setting_name, message)
+            elif len(syntaxes) >= 50:
+                message = "THE TRANSLATOR (Over 50 language syntaxes used)"
+                achievement_function(setting_name, message)
+
         sublime.save_settings("achievement.sublime-settings")
 
     def on_load_async(self, view):
