@@ -18,7 +18,7 @@ class EventAchievementChecker(sublime_plugin.EventListener):
         count = setting.get(setting_name, 0) + 1
         self.count_achievement_function(setting_name, count, (1,), "Hello Save World!")
         self.count_achievement_function(setting_name, count, (10, 100, 300, 500, 1000, 10000, 100000), "Save {num} times!")
-        self.count_achievement_function(setting_name, count, (99999999,), "Oversave!!!")
+        self.count_achievement_function(setting_name, count, (99999999,), "Oversave!!! (Save 99999999 times!!!)")
         setting.set(setting_name, count)
 
         # filename achievement
@@ -51,27 +51,13 @@ class EventAchievementChecker(sublime_plugin.EventListener):
             achievement_function(setting_name, message)
 
         # file_type achievement
-        setting_name = "file_type"
-        current_syntax = view.settings().get("syntax")
-        syntaxes = setting.get(setting_name, [])
-        if current_syntax not in syntaxes:
-            syntaxes.append(current_syntax)
-            setting.set(setting_name, syntaxes)
-            if len(syntaxes) == 10:
-                message = "Multilingual (Use 10 kinds of language syntax)"
-                achievement_function(setting_name, message)
-            elif len(syntaxes) == 20:
-                message = "Multibilingual (Use 20 kinds of language syntax)"
-                achievement_function(setting_name, message)
-            elif len(syntaxes) == 30:
-                message = "Multitrilingual (Use 30 kinds of language syntax)"
-                achievement_function(setting_name, message)
-            elif len(syntaxes) == 40:
-                message = "Multiquadrilingual (Use 40 kinds of language syntax)"
-                achievement_function(setting_name, message)
-            elif len(syntaxes) >= 50:
-                message = "THE TRANSLATOR (Over 50 language syntaxes used)"
-                achievement_function(setting_name, message)
+        setting = self._file_type_achievement(view, setting)
+
+        # easter_egg
+        if view.settings().get("font_size", 0) >= 50:
+            setting_name = "easter_egg"
+            message = "Eyes are bad? (Font size greater than 50)"
+            achievement_function(setting_name, message)
 
         sublime.save_settings("achievement.sublime-settings")
 
@@ -84,6 +70,9 @@ class EventAchievementChecker(sublime_plugin.EventListener):
         self.count_achievement_function("load_count", count, (10, 100, 300, 500, 1000, 10000, 100000), "Load {num} times!")
         self.count_achievement_function("load_count", count, (99999999,), "Overload!!!")
         setting.set("load_count", count)
+
+        # file_type achievement
+        setting = self._file_type_achievement(view, setting)
 
         sublime.save_settings("achievement.sublime-settings")
 
@@ -171,6 +160,31 @@ class EventAchievementChecker(sublime_plugin.EventListener):
         pass
         # print("QUERY_CONTEXT")
         # print(key, operator, operand, match_all)
+
+    def _file_type_achievement(self, view, setting):
+        # file_type achievement
+        setting_name = "file_type"
+        current_syntax = view.settings().get("syntax")
+        syntaxes = setting.get(setting_name, [])
+        if current_syntax not in syntaxes:
+            syntaxes.append(current_syntax)
+            setting.set(setting_name, syntaxes)
+            if len(syntaxes) == 10:
+                message = "Multilingual (Use 10 kinds of language syntax)"
+                achievement_function(setting_name, message)
+            elif len(syntaxes) == 20:
+                message = "Multibilingual (Use 20 kinds of language syntax)"
+                achievement_function(setting_name, message)
+            elif len(syntaxes) == 30:
+                message = "Multitrilingual (Use 30 kinds of language syntax)"
+                achievement_function(setting_name, message)
+            elif len(syntaxes) == 40:
+                message = "Multiquadrilingual (Use 40 kinds of language syntax)"
+                achievement_function(setting_name, message)
+            elif len(syntaxes) >= 50:
+                message = "THE TRANSLATOR (Over 50 language syntaxes used)"
+                achievement_function(setting_name, message)
+        return setting
 
 
 class ViewAchievementCommand(sublime_plugin.TextCommand):
