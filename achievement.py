@@ -16,9 +16,9 @@ class EventAchievementChecker(sublime_plugin.EventListener):
         # save_count achievement
         setting_name = "save_count"
         count = setting.get(setting_name, 0) + 1
-        self.count_achievement_function(setting_name, count, (1,), "Hello Save World!")
-        self.count_achievement_function(setting_name, count, (10, 100, 300, 500, 1000, 10000, 100000), "Save {num} times!")
-        self.count_achievement_function(setting_name, count, (99999999,), "Oversave!!! (Save 99999999 times!!!)")
+        count_achievement_function(setting_name, count, (1,), "Hello Save World!")
+        count_achievement_function(setting_name, count, (10, 100, 300, 500, 1000, 10000, 100000), "Save {num} times!")
+        count_achievement_function(setting_name, count, (99999999,), "Oversave!!! (Save 99999999 times!!!)")
         setting.set(setting_name, count)
 
         # filename achievement
@@ -66,9 +66,9 @@ class EventAchievementChecker(sublime_plugin.EventListener):
 
         # load_count achievement
         count = setting.get("load_count", 0) + 1
-        self.count_achievement_function("load_count", count, (1,), "Helload World!")
-        self.count_achievement_function("load_count", count, (10, 100, 300, 500, 1000, 10000, 100000), "Load {num} times!")
-        self.count_achievement_function("load_count", count, (99999999,), "Overload!!!")
+        count_achievement_function("load_count", count, (1,), "Helload World!")
+        count_achievement_function("load_count", count, (10, 100, 300, 500, 1000, 10000, 100000), "Load {num} times!")
+        count_achievement_function("load_count", count, (99999999,), "Overload!!!")
         setting.set("load_count", count)
 
         # file_type achievement
@@ -81,9 +81,9 @@ class EventAchievementChecker(sublime_plugin.EventListener):
 
         # new_file_count achievement
         count = setting.get("new_file_count", 0) + 1
-        self.count_achievement_function("new_file_count", count, (1,), "Hello World!")
-        self.count_achievement_function("new_file_count", count, (10, 100, 300, 500, 1000, 10000, 100000), "Create new file {num} times!")
-        self.count_achievement_function("new_file_count", count, (99999999,), "THE MAKER")
+        count_achievement_function("new_file_count", count, (1,), "Hello World!")
+        count_achievement_function("new_file_count", count, (10, 100, 300, 500, 1000, 10000, 100000), "Create new file {num} times!")
+        count_achievement_function("new_file_count", count, (99999999,), "THE MAKER")
         setting.set("new_file_count", count)
 
         sublime.save_settings("achievement.sublime-settings")
@@ -93,34 +93,12 @@ class EventAchievementChecker(sublime_plugin.EventListener):
 
         # clone_file_count achievement
         count = setting.get("clone_file_count", 0) + 1
-        self.count_achievement_function("clone_file_count", count, (1,), "Duplicate Window!")
-        self.count_achievement_function("clone_file_count", count, (10, 100, 300, 500, 1000, 10000, 100000), "Duplicate file {num} times!")
-        self.count_achievement_function("clone_file_count", count, (99999999,), "Cloned Human")
+        count_achievement_function("clone_file_count", count, (1,), "Duplicate Window!")
+        count_achievement_function("clone_file_count", count, (10, 100, 300, 500, 1000, 10000, 100000), "Duplicate file {num} times!")
+        count_achievement_function("clone_file_count", count, (99999999,), "Cloned Human")
         setting.set("clone_file_count", count)
 
         sublime.save_settings("achievement.sublime-settings")
-
-    def count_achievement_function(self, setting_name, count, achieving_counts, message):
-        u"""
-        setting_name(str): 'load_count'
-        achieving_counts(int list): (1, 10, 100, 5000, 1000)
-        message(str): 'save {num} times!'
-            message can contain integer number{num}
-        """
-        if count in achieving_counts:
-            message = message.format(num=count)
-            achievement_dialog(message)
-            unlocked_settings = sublime.load_settings("unlocked.sublime-settings")
-            unlocked_titles = unlocked_settings.get("unlocked_titles", [])
-            if setting_name in unlocked_titles:
-                c_setting = unlocked_settings.get(setting_name, [])
-                c_setting.append(message)
-                unlocked_settings.set(setting_name, c_setting)
-            else:
-                unlocked_titles.append(setting_name)
-                unlocked_settings.set("unlocked_titles", unlocked_titles)
-                unlocked_settings.set(setting_name, [message])
-            sublime.save_settings("unlocked.sublime-settings")
 
     def on_selection_modified_async(self, view):
         count_achievement_function("selector_count", len(view.sel()), (2,), "multi selector!")
