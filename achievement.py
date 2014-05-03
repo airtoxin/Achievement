@@ -36,7 +36,7 @@ class EventAchievementChecker(sublime_plugin.EventListener):
         if "foo" in filename:
             message = "new file contains 'foo' in filename"
             achievement_function(setting_name, message)
-        if "baa" in filename:
+        if "bar" in filename:
             message = "new file contains 'bar' in filename"
             achievement_function(setting_name, message)
         if "baz" in filename:
