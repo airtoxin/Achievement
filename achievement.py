@@ -134,7 +134,7 @@ class EventAchievementChecker(sublime_plugin.EventListener):
         pass
         # print("WINDOW")
         # print(window, command_name, args)
-    def on_query_context(view, key, operator, operand, match_all):
+    def on_query_context(self, view, key, operator, operand, match_all):
         pass
         # print("QUERY_CONTEXT")
         # print(key, operator, operand, match_all)
