@@ -4,6 +4,7 @@
 import sublime
 import sublime_plugin
 import sys
+import os
 sys.path.append("/".join(__file__.split("/")[:-1]))
 from override_shortcutkey import *
 from achievement_functions import achievement_dialog, achievement_function, count_achievement_function
@@ -186,3 +187,11 @@ class ViewAchievementCommand(sublime_plugin.TextCommand):
         achievement_window.set_name("achievements")
         achievement_window.set_scratch(True)
         achievement_window.set_read_only(True)
+
+class ClearAchievementCommand(sublime_plugin.TextCommand):
+    def run(self, edit):
+        if sublime.ok_cancel_dialog("Do you realy want to clear Achievements?"):
+            if sublime.ok_cancel_dialog("DO YOU REALY WANT TO CLEAR ACHIEVEMENTS?"):
+                os.remove(os.path.join(sublime.packages_path(), "User", "achievement.sublime-settings"))
+                os.remove(os.path.join(sublime.packages_path(), "User", "unlocked.sublime-settings"))
+                sublime.message_dialog("All Achievements cleared.")
