@@ -23,7 +23,4 @@ In your sublime text menu, __Sublime Text > Preferences > Package Settings > Ach
 Or, in command palette, select __View Achievements__
 
 ###Reset
-Delete files on your packages directory ( _/Users/username/Library/Application Support/Sublime Text 3/Packages/User/_ )
-
-+ achievement.sublime-settings
-+ unlocked.sublime-settings
+__Sublime Text > Preferences > Package Settings > Achievement > Clear Achievements__
