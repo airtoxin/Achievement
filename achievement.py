@@ -183,3 +183,6 @@ class ViewAchievementCommand(sublime_plugin.TextCommand):
 
         message = "*=*=*=*=*=*=*=* UNLOCKED ACHIEVEMENTS *=*=*=*=*=*=*=*".center(size) + "\n"
         achievement_window.insert(edit, 0, message)
+        achievement_window.set_name("achievements")
+        achievement_window.set_scratch(True)
+        achievement_window.set_read_only(True)
