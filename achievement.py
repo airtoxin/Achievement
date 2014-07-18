@@ -169,8 +169,10 @@ class EventAchievementChecker(sublime_plugin.EventListener):
 class ViewAchievementCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         size = 50
-        w = self.view.window()
-        achievement_window = w.new_file()
+        window = self.view.window()
+        achievement_window = window.new_file()
+        achievement_window.set_name("achievements")
+        achievement_window.set_scratch(True)
         # write unlocked achievement
         unlocked_settings = sublime.load_settings("unlocked.sublime-settings")
         unlocked_titles = unlocked_settings.get("unlocked_titles", [])
@@ -184,9 +186,8 @@ class ViewAchievementCommand(sublime_plugin.TextCommand):
 
         message = "*=*=*=*=*=*=*=* UNLOCKED ACHIEVEMENTS *=*=*=*=*=*=*=*".center(size) + "\n"
         achievement_window.insert(edit, 0, message)
-        achievement_window.set_name("achievements")
-        achievement_window.set_scratch(True)
         achievement_window.set_read_only(True)
+        window.focus_view(self.view)
 
 class ClearAchievementCommand(sublime_plugin.TextCommand):
     def run(self, edit):
