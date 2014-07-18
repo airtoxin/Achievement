@@ -18,6 +18,10 @@
 						{
 							"caption": "View Achievements",
 							"command": "view_achievement"
+						},
+						{
+							"caption": "Clear Achievements",
+							"command": "clear_achievement"
 						}
 					]
 				}

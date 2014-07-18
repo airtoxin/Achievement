@@ -1,7 +1,7 @@
 [
-	{ "keys": ["super+shift+,"], "command": "view_achievement" },
-	{ "keys": ["super+x"], "command": "override_cut" },
-	{ "keys": ["super+c"], "command": "override_copy" },
-	{ "keys": ["super+v"], "command": "override_paste" },
-	{ "keys": ["super+a"], "command": "override_select_all" }
+    { "keys": ["super+shift+,"], "command": "view_achievement" },
+    { "keys": ["super+x"], "command": "override_cut" },
+    { "keys": ["super+c"], "command": "override_copy" },
+    { "keys": ["super+v"], "command": "override_paste" },
+    { "keys": ["super+a"], "command": "override_select_all" }
 ]
