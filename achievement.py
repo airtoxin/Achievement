@@ -3,11 +3,10 @@
 
 import sublime
 import sublime_plugin
-import sys
-import os
-sys.path.append("/".join(__file__.split("/")[:-1]))
-from override_shortcutkey import *
-from achievement_functions import achievement_dialog, achievement_function, count_achievement_function
+from os.path import join
+
+from .libs.override_shortcutkey import *
+from .libs.achievement_functions import achievement_dialog, achievement_function, count_achievement_function
 
 
 class EventAchievementChecker(sublime_plugin.EventListener):

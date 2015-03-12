@@ -4,9 +4,8 @@
 import sublime
 import sublime_plugin
 import threading
-import sys
-sys.path.append("/".join(__file__.split("/")[:-1]))
-from achievement_functions import achievement_dialog, achievement_function, count_achievement_function
+
+from .achievement_functions import achievement_dialog, achievement_function, count_achievement_function
 
 
 class OverrideCutCommand(sublime_plugin.TextCommand):
