@@ -1,4 +1,7 @@
 #sublime-achievement
+
+![ST2](https://img.shields.io/badge/Sublime%20Text-2.0.2.-blue.svg) ![ST3](https://img.shields.io/badge/Sublime%20Text-build 3065-blue.svg)
+
 Add some achievements into sublime text 3.
 
 ##Installation
